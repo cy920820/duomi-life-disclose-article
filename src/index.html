@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>多米生活 - 爆料文章</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <script>
+    (function (doc, win) {
+      let docEl = doc.documentElement
+      // viewport变化事件源
+      let resizeEvent = 'orientationchange' in window ? 'orientationchang' : 'resize'
+      let rescale = function () {
+        win.clientWidth = docEl.clientWidth
+        if (!win.clientWidth) return
+        // (屏幕宽度/设计图宽度) = 缩放或扩大的比例值
+        docEl.style.fontSize = 100 * (win.clientWidth / 750) + 'px'
+      }
+      if (!doc.addEventListener) return
+      win.addEventListener(resizeEvent, rescale, false)
+      doc.addEventListener('DOMContentLoaded', rescale, false)
+    })(document, window)
+  </script>
+
+</head>
+
+<body>
+  <div>多米生活</div>
+  <script src="./js/vendor/zepto.1.2.0.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
