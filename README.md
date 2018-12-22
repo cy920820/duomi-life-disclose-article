@@ -31,12 +31,7 @@ cd my-project
 yarn install
 ```
 
-初始化项目目录
-```
-yarn run init
-```
-
-本地开发
+本地开启服务进行预览开发
 ```
 yarn start
 ```
