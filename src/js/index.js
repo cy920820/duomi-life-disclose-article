@@ -9,7 +9,7 @@
     e.stopPropagation()
   })
 
-  $(document).click(() => {
+  $('div').parents().click(() => {
     $('.action-sheet-modal').hide()
     $('.action-sheet').removeClass('up')
   })
