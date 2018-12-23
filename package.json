@@ -8,7 +8,8 @@
     "build": "rm -rf ./dist && gulp prod",
     "lint": "eslint ./src --ext .js && eslint ./config --ext .js",
     "start": "rm -rf ./dist && gulp dev",
-    "init": "gulp init"
+    "init": "gulp init",
+    "pages": "cp -r dist/* ./"
   },
   "pre-commit": [
     "lint"
