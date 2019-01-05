@@ -349,3 +349,45 @@
     }
   }
 }
+
+// loading
+
+.loading {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loading-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    width: 80px;
+    height: 80px;
+
+    .loading-circle {
+      width: 36px;
+      height: 36px;
+      border-width: 2px;
+      border-color: rgb(78, 78, 78) rgb(78, 78, 78) rgb(78, 78, 78) rgb(255, 255, 255);
+      border-style: solid;
+      border-radius: 50%;
+      animation: spinner .9s linear infinite;
+    }
+  }
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
