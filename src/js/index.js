@@ -1,4 +1,6 @@
 (function($) {
+
+  // ===========> 数据渲染交互之外的逻辑（环境判断）<===========
   // 是否是微信
   function isWeixinBrowser() {
     var ua = navigator.userAgent.toLowerCase()
@@ -53,6 +55,8 @@
     }, t)
   }
 
+  // =============> 前端交互逻辑start <=============
+
   // 数据请求前显示loading
   $('.loading').show()
 
@@ -96,8 +100,13 @@
   function renderGoodsList(data) {
     $('.rich-text-editor').html(data)
     $('.commodityCard #purchase').click(() => {
-      $('.dialog-modal').show()
+      dialogShow()
     })
+  }
+
+  // 显示dialog
+  function dialogShow () {
+    $('.dialog-modal').show()
   }
 
   // 关闭dialog
@@ -108,26 +117,15 @@
   // 渲染相关商品
   function renderRelatedGoods(data) {
     let htmlAry = []
-    if (data.length) {
+    let goodsLength = data.length
+    // 相关商品 >= 1
+    if (goodsLength) {
       for (let i = 0; i <= data.length; i++) {
         let cur = data[i]
         if (cur) {
-          let str = data.length === 1 ? `
+          let str = `
           <li>
-            <a class="multiRelatedGoods">
-              <div class="left"><img src="${cur.pict_url}"></div>
-              <div class="right">
-                <div class="product-title">${cur.title}</div>
-                <div class="bottom">
-                  <div class="price">￥29.8</div>
-                  <div class="btn">去购买</div>
-                </div>
-              </div>
-            </a>
-          </li>
-          ` : `
-          <li>
-            <a href=${cur.click_url}>
+            <a class="relatedGoods">
               <div class="left"><img src="${cur.pict_url}"></div>
               <div class="right">
                 <div class="product-title">${cur.title}</div>
@@ -141,19 +139,63 @@
           `
           htmlAry.push(str)
 
+          // 当相关商品大于1时渲染actionSheet
           if (data.length == 1) {
             renderActionSheet(data)
           }
         }
       }
       $('.related-goods').append(htmlAry.join(''))
-      $('.related-goods li .btn').click(actionSheetControler)
-    } else {
+
+      // 点击相关商品购买显示dialog
+      $('.related-goods li .btn').click(() => {
+        dialogShow()
+      })
+
+      // 底部显示 直达链接 | 返利模式购买 按钮
+      let str = `
+      <a href="javascript:void(0)" class="through-link">直达链接</a>
+      <a href="javascript:void(0)" class="rebate">返利模式购买</a>
+      `
+
+      $('.bottom-btns-container .btns').append(str)
+
+      // 初始化dom变量
+      let $througnLink = $('.through-link')
+      let $rebate = $('.rebate')
+
+      // 如果商品数量大于1
+      if (goodsLength > 1) {
+        $througnLink.click((e) => {
+          actionSheetControler(e)
+        })
+
+        // 跳转到下载链接
+        $rebate.click(() => {
+          window.location = ''
+        })
+      } else if (goodsLength === 1) {
+        $througnLink.click(() => {
+          dialogShow()
+        })
+
+        // 跳转到下载链接
+        $rebate.click(() => {
+          window.location = ''
+        })
+      }
+    } else { // 相关商品数量为0
       $('.related-products').hide()
+
+      // 显示按钮：打开APP看更多爆料文章
+      let str = `<a href="javascript:void(0)" class="view-more-detail">打开APP看更多爆料文章</a>`
+      $('.bottom-btns-container .btns').append(str)
+      $('.activity-desc').css('marginBottom', '.8rem')
+      // 点击按钮跳转到下载链接
     }
   }
 
-  // actionSheet 展示
+  // 渲染actionSheet列表
   function renderActionSheet(goods) {
     let htmlAry = []
     for (let i = 0; i < goods.length; i++) {
