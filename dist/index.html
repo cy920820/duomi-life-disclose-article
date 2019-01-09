@@ -1,4 +1,17 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"><meta http-equiv="X-UA-Compatible" content="ie=edge"><!-- <title>多米生活 - 爆料文章</title> --><title>demo</title><link rel="stylesheet" href="./css/reset-9b204dca6c.css"><link rel="stylesheet" href="./css/index-6266957d2b.css"><link rel="stylesheet" href="./css/article-a2dadf53b1.css"><script>(function (doc, win) {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <title>多米生活 - 爆料文章</title> -->
+  <title>demo</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/article.css">
+  <script>
+    (function (doc, win) {
       let docEl = doc.documentElement
       // viewport变化事件源
       let resizeEvent = 'orientationchange' in window ? 'orientationchang' : 'resize'
@@ -11,10 +24,44 @@
       if (!doc.addEventListener) return
       win.addEventListener(resizeEvent, rescale, false)
       doc.addEventListener('DOMContentLoaded', rescale, false)
-    })(document, window)</script><!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script> --></head><body><div class="wrapper" style="display:none"><header class="header"><img src="./images/bg_header-84024c227a.jpg" alt="header_bg" class="header-bg"><div class="header-content"><div class="content-source"><span class="label">粉色专享</span> <span class="date">12-04</span></div><div class="content-title"><span>【天^猫^超市】神券专场</span></div><div class="content-desc"><p>天^猫^超市无门槛券攻略50、100等大额券</p></div></div></header><section class="activity-desc"><div class="rich-text-editor"></div></section><section class="related-products"><h3>本文相关商品</h3><div class="products-list"><ul class="related-goods"><!-- <li>
+    })(document, window)
+  </script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script> -->
+
+</head>
+
+<body>
+  <div class="wrapper" style="display: none">
+    <header class="header">
+      <img src="./images/bg_header.jpg" alt="header_bg" class="header-bg">
+      <div class="header-content">
+        <div class="content-source">
+          <span class="label">多米生活</span>
+          <span class="date">12-04</span>
+        </div>
+        <div class="content-title">
+          <span>【天^猫^超市】神券专场</span>
+        </div>
+        <div class="content-desc">
+          <p>天^猫^超市无门槛券攻略50、100等大额券</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="activity-desc">
+      <div class="rich-text-editor">
+        
+      </div>
+    </section>
+
+    <section class="related-products">
+      <h3>本文相关商品</h3>
+      <div class="products-list">
+        <ul class="related-goods">
+          <!-- <li>
             <a href="#">
-              <div class="left"><img src="./images/products-e8d4626498.png"></div>
+              <div class="left"><img src="./images/products.png"></div>
               <div class="right">
                 <div class="product-title">【加绒加厚】卫衣女2018秋冬加绒加厚新款长袖连帽外套学生百搭ulzzang上衣潮 【加绒】7076黄色 M【建议</div>
                 <div class="bottom">
@@ -23,7 +70,59 @@
                 </div>
               </div>
             </a>
-          </li>--></ul></div></section><!-- 底部按钮容器 --><div class="bottom-btns-container"><div class="btns"><!-- <a href="javascript:void(0)" class="through-link">直达链接</a> --><!-- <a href="javascript:void(0)" class="rebate">返利模式购买</a> --></div></div><!-- dialog --><div class="modal dialog-modal"><div class="modal-content"><h2>复制文字 - 打开淘宝即可购买</h2><p class="password">￥XJSKJERIJS￥</p><p class="tip">复制成功</p><p class="url">复制链接购买</p><p class="bottom-desc">复制购买链接 - 打开浏览器粘贴购买</p><i class="modal-content--btn"></i></div></div><!-- action sheet --><div class="action-sheet"><div class="action-sheet--controller"></div><div class="action-sheet--options"><ul class="action-sheet--list"><!-- <li>
+          </li>-->
+        </ul>
+      </div>
+    </section>
+
+    <!-- 底部按钮容器 -->
+    <div class="bottom-btns-container">
+      <div class="btns">
+        <!-- <a href="javascript:void(0)" class="through-link">直达链接</a> -->
+        <!-- <a href="javascript:void(0)" class="rebate">返利模式购买</a> -->
+      </div>
+    </div>
+
+    <!-- dialog -->
+    <div class="modal dialog-modal">
+      <div class="modal-content">
+        <h2>复制文字 - 打开淘宝即可购买</h2>
+        <p class="password">￥XJSKJERIJS￥</p>
+        <p class="tip">复制淘口令</p>
+        <p class="url">复制链接购买</p>
+        <p class="bottom-desc">复制购买链接 - 打开浏览器粘贴购买</p>
+        <i class="modal-content--btn"></i>
+      </div>
+    </div>
+
+    <!-- copy tips -->
+    <div id="fixed" style="display: none">已复制到剪贴板!</div>
+
+    <!-- action sheet -->
+    <div class="action-sheet">
+      <div class="action-sheet--controller"></div>
+      <div class="action-sheet--options">
+        <ul class="action-sheet--list">
+          <!-- <li>
             <p class="title">白菜价</p>
             <a class="btn">直达链接</a>
-          </li> --></ul></div></div><div class="modal action-sheet-modal"></div><!-- action sheet end --></div><!-- loading --><div class="loading"><div class="loading-main"><p class="loading-circle"></p></div></div><script src="./js/vendor/zepto-220d73ef86.1.2.0.min.js"></script><script src="./js/index-9f9da78e29.js"></script></body></html>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="modal action-sheet-modal"></div>
+    <!-- action sheet end -->
+
+  </div>
+  <!-- loading -->
+  <div class="loading">
+    <div class="loading-main">
+      <p class="loading-circle"></p>
+    </div>
+  </div>
+  <script src="./js/vendor/zepto.1.2.0.min.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
