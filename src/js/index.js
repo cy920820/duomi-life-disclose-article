@@ -1,5 +1,4 @@
 (function($) {
-
   // ===========> 数据渲染交互之外的逻辑（环境判断）<===========
   // 是否是微信
   function isWeixinBrowser() {
@@ -63,22 +62,26 @@
   // 请求文章内容
   $.ajax({
     type: 'GET',
-    url: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=125',
+    url: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=130',
     dataType: 'json',
-    success: function(data) {
+    success: function(res) {
       $('.wrapper').show()
       $('.loading').hide()
-      if (data.data) {
-        let dataAry = data.data.items
-        if (dataAry.length) {
+      let data = res.data
+      if (data && data.items) {
+        let dataAry = data.items
+        if (dataAry && dataAry.length) {
           renderArticleInfo(dataAry[0])
           renderGoodsList(dataAry[0].content)
           renderRelatedGoods(dataAry[0].numInfos)
         }
+      } else {
+        alert('文章不存在,请刷新重试')
       }
     },
     error: function(xhr, type) {
       alert('服务器繁忙!')
+      $('.loading').hide()
     }
   })
 
