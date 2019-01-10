@@ -6,7 +6,9 @@
     "es6": true
   },
   "globals": {
-    "Zepto": false
+    "Zepto": false,
+    "utils": false,
+    "FastClick": false
   },
   "rules": {
     "indent": ["error", 2, {
