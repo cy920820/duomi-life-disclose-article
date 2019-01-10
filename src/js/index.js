@@ -1,11 +1,9 @@
 (function($) {
   $(function($) {
+    // 解决300ms延迟
+    FastClick.attach(document.body)
+
     // ===========> 数据渲染交互之外的逻辑（环境判断）<===========
-    // 统一管理url
-    let url = {
-      articlelist: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=132',
-      getitemdetail: 'https://shiziquan.com/shiziquan/learn?action=getitemdetail'
-    }
     // 首先判断顶层window对象 getAppInfo
     // 默认是app环境
     let env = 'app'
@@ -62,6 +60,12 @@
     }
 
     // =============> 前端交互逻辑start <=============
+
+    // 统一管理url
+    let url = {
+      articlelist: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=132',
+      getitemdetail: 'https://shiziquan.com/shiziquan/learn?action=getitemdetail'
+    }
 
     // 数据请求前显示loading
     $('.loading').show()
