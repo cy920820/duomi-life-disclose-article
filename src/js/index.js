@@ -60,11 +60,17 @@
     }
 
     // =============> 前端交互逻辑start <=============
+    // 通过url获取用户accountId
+    let accountId = utils.getParameterByName('accountId')
 
     // 统一管理url
     let url = {
+      // 文章商品列表
       articlelist: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=136',
-      getitemdetail: 'https://shiziquan.com/shiziquan/learn?action=getitemdetail'
+      // 点击商品卡片获取真实的linkurl 和 淘口令
+      getitemdetail: 'https://shiziquan.com/shiziquan/learn?action=getitemdetail',
+      // 文章内淘宝链或者天猫链点击获取真实linkurl 和 淘口令
+      urlpidformat: 'https://shiziquan.com/shiziquan/learn?action=urlpidformat'
     }
 
     // 数据请求前显示loading
@@ -79,12 +85,16 @@
         $('.wrapper').show()
         $('.loading').hide()
         let data = res.data
-        if (data && data.items) {
+        if (!utils.isEmptyObject(data)) {
           let dataAry = data.items
           if (dataAry && dataAry.length) {
+            // 渲染数据
             renderArticleInfo(dataAry[0])
             renderGoodsList(dataAry[0].content)
             renderRelatedGoods(dataAry[0].numInfos)
+
+            // 取消a标签的默认行为
+            articleLink()
           }
         } else {
           alert('文章不存在,请刷新重试')
@@ -95,6 +105,43 @@
         $('.loading').hide()
       }
     })
+
+    // 当文章内容出现带有天猫或者淘宝的链接时阻止跳转并发送请求
+    function articleLink() {
+      $('a').each((index, item) => {
+        let href = item.href
+        if (href.indexOf('taobao') > -1 || href.indexOf('tmall') > -1) {
+          item.addEventListener('click', (e) => {
+            e = e || window.event
+            if (e.preventDefault) {
+              e.preventDefault()
+            } else {
+              e.returnValue = false
+            }
+            $.ajax({
+              url: url.urlpidformat,
+              type: 'POST',
+              data: {
+                accountId,
+                linkUrl: href
+              },
+              dataType: 'json',
+              success(res) {
+                let data = res.data
+                if (!utils.isEmptyObject(data)) {
+                  let linkUrl = data.linkUrl
+                  let tpwd = data.tpwd
+                  showTKLDialog(tpwd, linkUrl)
+                }
+              },
+              error() {
+                alert('服务器繁忙!')
+              }
+            })
+          })
+        }
+      })
+    }
 
     // 渲染文章相关信息
     function renderArticleInfo(data) {
@@ -110,32 +157,36 @@
       $('.content-desc p').text(descTitle)
     }
 
+    // 显示淘口令对话框
+    function showTKLDialog(taoCommand, taoUrl) {
+      $('.modal-content .password').text(taoCommand)
+      utils.copy($('.modal-content .tip')[0], taoCommand)
+      utils.copy($('.modal-content .url')[0], taoUrl)
+      dialogShow()
+    }
+
     // 商品卡片点击处理函数 (包含环境判断)
     function goodsCardHandler(el) {
       // 浏览器环境
       if (env === 'browser') {
         // 获取用户id
-        let accountID = utils.getParameterByName('accountID')
         let numIid = el.data('commodityid')
         // 请求跳转链接
         $.ajax({
           url: url.getitemdetail,
           type: 'POST',
           data: {
-            accountID,
+            accountId,
             num_iid: numIid
           },
           dataType: 'json',
           success(res) {
             let data = res.data
-            if (data && data.tbkItemInfo) {
+            if (!utils.isEmptyObject(data)) {
               let tbkItemInfo = data.tbkItemInfo
               let taoCommand = tbkItemInfo.tpwd
               let taoUrl = tbkItemInfo.coupon_click_url
-              $('.modal-content .password').text(taoCommand)
-              utils.copy($('.modal-content .tip')[0], taoCommand)
-              utils.copy($('.modal-content .url')[0], taoUrl)
-              dialogShow()
+              showTKLDialog(taoCommand, taoUrl)
             }
           },
           error() {

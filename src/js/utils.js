@@ -55,9 +55,18 @@ const utils = (function() {
     })
   }
 
+  /**
+  * 判断对象是否为空
+  */
+
+  function isEmptyObject(obj) {
+    return !Object.keys(obj).length
+  }
+
   return {
     getParameterByName,
     isWeixinBrowser,
-    copy
+    copy,
+    isEmptyObject
   }
 })()
