@@ -63,7 +63,7 @@
 
     // 统一管理url
     let url = {
-      articlelist: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=132',
+      articlelist: 'https://shiziquan.com/shiziquan/learn?action=articlelist&accountId=1000036&artId=136',
       getitemdetail: 'https://shiziquan.com/shiziquan/learn?action=getitemdetail'
     }
 
