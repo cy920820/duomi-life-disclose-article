@@ -8,7 +8,8 @@
   "globals": {
     "Zepto": false,
     "utils": false,
-    "FastClick": false
+    "FastClick": false,
+    "ClipboardJS": false
   },
   "rules": {
     "indent": ["error", 2, {
