@@ -1,4 +1,4 @@
-const utils = (function() {
+const utils = (function () {
   /**
    * 获取url params
    * @param {*} name
@@ -27,37 +27,57 @@ const utils = (function() {
   /**
    * 剪贴板
    */
-  function copy(el, command) {
-    // 获取元素并绑定点击事件
-    let copyEl = el
-    copyEl.addEventListener('click', () => {
-      let fixedEl = document.getElementById('fixed')
-      if (fixedEl.style.display === '') return
-      // 创建input元素
-      const inputEl = document.createElement('input')
+  // function copy(el, command) {
+  //   // 获取元素并绑定点击事件
+  //   let copyEl = el
+  //   copyEl.addEventListener('click', () => {
+  //     let fixedEl = document.getElementById('fixed')
+  //     if (fixedEl.style.display === '') return
+  //     // 创建input元素
+  //     const inputEl = document.createElement('input')
 
-      // 设置只读，防止键盘弹出
-      inputEl.setAttribute('readonly', 'readonly')
-      // 设置口令内容
-      inputEl.setAttribute('value', command)
-      document.body.appendChild(inputEl)
-      // inputEl.select()
-      inputEl.setSelectionRange(0, inputEl.value.length) // 兼容iOS
-      if (document.execCommand('copy')) {
-        document.execCommand('copy')
-        fixedEl.style.display = ''
-      }
-      document.body.removeChild(inputEl)
+  //     // 设置只读，防止键盘弹出
+  //     inputEl.setAttribute('readonly', 'readonly')
+  //     // 设置口令内容
+  //     inputEl.setAttribute('value', command)
+  //     document.body.appendChild(inputEl)
+  //     // inputEl.select()
+  //     inputEl.setSelectionRange(0, inputEl.value.length) // 兼容iOS
+  //     if (document.execCommand('copy')) {
+  //       document.execCommand('copy')
+  //       fixedEl.style.display = ''
+  //     }
+  //     document.body.removeChild(inputEl)
 
+  //     setTimeout(() => {
+  //       fixedEl.style.display = 'none'
+  //     }, 1500)
+  //   })
+  // }
+
+  function copy(el) {
+    let fixedEl = document.getElementById('fixed')
+    if (fixedEl.style.display === '') return
+
+    // 复制口令、链接
+    var clipboard = new ClipboardJS(el)
+    clipboard.on('success', function (e) {
+      // console.info('Text:', e.text)
+      fixedEl.style.display = ''
+      e.clearSelection()
       setTimeout(() => {
         fixedEl.style.display = 'none'
       }, 1500)
     })
+
+    clipboard.on('error', function (e) {
+      alert('请稍后重试!')
+    })
   }
 
   /**
-  * 判断对象是否为空
-  */
+   * 判断对象是否为空
+   */
 
   function isEmptyObject(obj) {
     return !Object.keys(obj).length

@@ -160,8 +160,10 @@
     // 显示淘口令对话框
     function showTKLDialog(taoCommand, taoUrl) {
       $('.modal-content .password').text(taoCommand)
-      utils.copy($('.modal-content .tip')[0], taoCommand)
-      utils.copy($('.modal-content .url')[0], taoUrl)
+      $('.modal-content .tip').attr('data-clipboard-text', taoCommand)
+      $('.modal-content .url').attr('data-clipboard-text', taoUrl)
+      utils.copy('.modal-content .tip')
+      utils.copy('.modal-content .url')
       dialogShow()
     }
 
@@ -218,7 +220,7 @@
       $('.dialog-modal').hide()
     })
 
-    // 渲染相关商品
+    // 渲染相关商品 及 actionSheet options
     function renderRelatedGoods(data) {
       let htmlAry = []
       let goodsLength = data.length
